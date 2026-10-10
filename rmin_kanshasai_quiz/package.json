@@ -1,0 +1,13 @@
+{
+  "name": "rmin-kanshasai-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "R民感謝祭 smartphone quiz prototype",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

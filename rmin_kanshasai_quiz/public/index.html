@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R民感謝祭 クイズ</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="pattern"></div>
+<header><img class="logo" src="/assets/rmin-kanshasai-logo.png" alt="R民感謝祭"></header>
+<main>
+  <nav class="tabs"><button class="tab active" data-view="player">参加者</button><button class="tab" data-view="host">司会者</button></nav>
+  <section id="playerView" class="panel">
+    <div id="joinBox">
+      <h1>クイズに参加</h1>
+      <label>ルームコード<input id="roomCode" autocomplete="off" maxlength="6" placeholder="司会者のコード"></label>
+      <label>参加者名<input id="playerName" autocomplete="nickname" maxlength="16" placeholder="名前"></label>
+      <button id="joinBtn" class="primary">参加する</button>
+    </div>
+    <div id="playerGame" hidden>
+      <div class="status" id="playerStatus">司会者の開始をお待ちください</div>
+      <h2 id="playerQuestion">まもなくクイズが始まります</h2>
+      <div class="clock" id="playerClock">--</div>
+      <button id="buzzBtn" class="buzz">早押し！</button>
+      <div class="choices" id="playerChoices"></div>
+      <img id="resultStamp" class="result-stamp" hidden>
+      <div id="myScore" class="score">0 pt</div>
+      <h3>ランキング</h3><ol id="playerRanking" class="ranking"></ol>
+    </div>
+  </section>
+  <section id="hostView" class="panel" hidden>
+    <div id="hostLogin">
+      <h1>司会者メニュー</h1>
+      <label>司会者PIN<input id="hostPin" type="password" placeholder="HOST_PIN"></label>
+      <button id="hostLoginBtn" class="primary">ログイン</button>
+      <p class="hint">公開前に HOST_PIN を必ず変更してください。</p>
+    </div>
+    <div id="hostGame" hidden>
+      <div class="room">参加コード：<strong id="hostRoomCode">------</strong><button id="copyRoom">コードをコピー</button></div>
+      <div class="host-columns">
+        <div>
+          <h2>問題を作成</h2>
+          <label>問題文<textarea id="qText" rows="3" placeholder="問題文を入力"></textarea></label>
+          <div class="choice-fields">
+            <label>①<input id="c0" placeholder="選択肢1"></label><label>②<input id="c1" placeholder="選択肢2"></label>
+            <label>③<input id="c2" placeholder="選択肢3"></label><label>④<input id="c3" placeholder="選択肢4"></label>
+          </div>
+          <div class="inline"><label>正解<select id="correct"><option value="0">①</option><option value="1">②</option><option value="2">③</option><option value="3">④</option></select></label>
+          <label>制限時間（秒）<input id="seconds" type="number" min="5" max="120" value="20"></label>
+          <label>得点<input id="points" type="number" min="1" max="1000" value="10"></label></div>
+          <button id="startBtn" class="primary">問題を出題</button>
+          <div class="control-row"><button id="lockBtn">回答締切</button><button id="revealBtn">正解発表</button><button id="lobbyBtn">待機画面へ</button></div>
+          <div class="control-row"><button id="demoBtn">サンプル問題を入力</button><button id="resetBtn" class="danger">得点リセット</button></div>
+        </div>
+        <div>
+          <h2>進行状況</h2><div id="hostStatus" class="status">待機中</div>
+          <h3 id="hostQuestion">問題はまだありません</h3><div class="clock" id="hostClock">--</div>
+          <p>早押し：<strong id="firstBuzz">なし</strong></p>
+          <h3>参加者</h3><ul id="hostPlayers" class="player-list"></ul>
+          <h3>ランキング</h3><ol id="hostRanking" class="ranking"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="toast" role="status"></div>
+</main>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+</body></html>

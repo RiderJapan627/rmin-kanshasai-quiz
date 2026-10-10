@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: rmin-kanshasai-quiz
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: HOST_PIN
+        sync: false
